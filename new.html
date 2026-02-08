@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Super Star FC — News</title>
+
+<link rel="shortcut icon" href="image0.jpeg" type="image/jpeg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+  :root { 
+    --bg: #0b1020; 
+    --card: #0f1724; 
+    --accent-red: #b62a2d; 
+    --accent-blue: #1c5da4; 
+    --muted: #9aa4b2; 
+    --max-w: 1100px; 
+    --radius: 12px; 
+    font-family: Inter, system-ui, sans-serif; 
+}
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--bg), #071021);
+      color: #e6eef8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    a:hover { color: var(--accent-red); }
+
+    /* ---------- Layout ---------- */
+    .container {
+      max-width: var(--max-w);
+      margin: auto;
+      padding: 28px 20px;
+    }
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.brand{
+  display:flex;
+  gap:12px;
+  text-decoration:none;
+  color:inherit;
+  font-weight:800;
+}
+
+.logo{
+  width:44px;
+  height:44px;
+  border-radius:8px;
+  background:linear-gradient(135deg,var(--accent-blue),var(--accent-red));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+}
+
+h1{text-align:center;color:var(--accent-blue);}
+p{text-align:center;color:var(--muted);}
+
+.news-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+  margin-bottom:50px;
+}
+
+.news-card{
+  background:var(--card);
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  transition:transform .3s;
+  cursor:pointer;
+}
+
+.news-card:hover{transform:translateY(-5px);}
+
+.news-card img{
+  width:100%;
+  border-radius:10px;
+  margin-bottom:12px;
+  aspect-ratio:16/9;
+  object-fit:cover;
+}
+
+.news-card h3{color:var(--accent-blue);}
+.news-card p{
+  font-size:.95rem;
+  line-height:1.6;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* Modal */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.modal.active{display:flex;}
+
+.modal-content{
+  background:var(--card);
+  max-width:800px;
+  width:100%;
+  max-height:90vh;
+  overflow:auto;
+  padding:30px;
+  border-radius:12px;
+  position:relative;
+}
+
+.modal-content img{
+  width:100%;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+.close{
+  position:absolute;
+  top:15px;
+  right:20px;
+  font-size:1.5rem;
+  cursor:pointer;
+  color:var(--muted);
+}
+
+.close:hover{color:var(--accent-red);}
+
+/* ---------- Footer ---------- */
+  background:#050a18;
+.site-footer {
+  background: #060a18;
+  color: #e6eef8;
+  padding: 36px 20px 20px;
+  font-size: 14px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Layout */
+.footer-container {
+  max-width: var(--max-w);
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 36px;
+}
+
+/* Brand */
+.footer-brand h3 {
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.footer-brand p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.footer-brand br {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+/* Section headers */
+.footer-links h4,
+.footer-contact h4,
+.footer-social h4 {
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-size: 15px;
+  position: relative;
+}
+
+/* Accent underline */
+.footer-links h4::after,
+.footer-contact h4::after,
+.footer-social h4::after {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 2px;
+  margin-top: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-red),
+    var(--accent-blue)
+  );
+}
+
+/* Links */
+.footer-links a {
+  display: block;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-secondary);
+  transform: translateX(4px);
+}
+
+/* Contact */
+.footer-contact p {
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+/* Social icons */
+/* Social icons */
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+
+  border-radius: 50%;
+  color: var(--muted);
+  text-decoration: none;
+
+  transition: 
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* SVG support */
+.social-icons a svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Hover */
+.social-icons a:hover {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.social-icons a.icon-youtube:hover {
+  background: #ff0000; /* YouTube red */
+}
+
+.social-icons a.icon-facebook:hover {
+  background: #1c5da4; /* Facebook blue */
+}
+
+.social-icons a.icon-twitter:hover {
+  background: #000000; /* Twitter black */
+}
+
+/* Keyboard focus (accessibility) */
+.social-icons a:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--bg),
+    0 0 0 4px var(--accent-secondary);
+}
+
+/* Footer bottom */
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 16px;
+  text-align: center;
+  color: var(--muted);
+  position: relative;
+}
+
+/* Gradient divider */
+.footer-bottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-red),
+    var(--accent-blue),
+    transparent
+  );
+}
+
+    @media (max-width: 520px) {
+      header { margin-bottom: 40px; }
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <a href="#" class="brand">
+    <div class="logo">SS</div>
+    <div>
+      <div>Super Star FC</div>
+      <div style="font-size:.8rem;color:var(--muted)">Official Club</div>
+    </div>
+  </a>
+  <a href="index.html" style="color:var(--accent-blue);font-weight:700">Main</a>
+</header>
+
+<h1>Team News</h1>
+<p>Stay up to date with Super Star FC announcements, achievements, and partnerships.</p>
+
+<section class="news-grid">
+  <div class="news-card" data-title="Season Opener: Super Stars FC Starts Strong"
+    data-img="ssf1.jpg"
+    data-content="In front of a packed Omaha crowd, the squad showed determination, teamwork, and hunger from the first whistle...">
+    <img src="ssf1.jpg">
+    <h3><a href="./open.html">Opener: Super Stars FC Starts Strong</a></h3>
+    <p><a href="./open.html" style="color: var(--muted);">In front of a packed Omaha crowd, the squad showed determination and hunger...</a></p>
+  </div>
+
+  <div class="news-card" data-title="Behind the scenes: Super Stars FC Training Season"
+    data-img="image2.jpeg"
+    data-content="Preparation Shapes Performance...">
+    <img src="image2.jpeg">
+    <h3><a href="./behind-the-scenes.html">Super Stars FC Training Season</a></h3>
+    <p><a href="./behind-the-scenes.html" style="color: var(--muted);">Preparation is where matches are truly won, long before the whistle blows or the crowd fills theI stands....</a></p>
+  </div>
+
+  <div class="news-card" data-title="Clean Sheet Victory!"
+    data-img="image3.jpeg"
+    data-content="Defense Shines in Statement Win...">
+    <img src="ssfc0.jpg">
+    <h3><a href="./clean-sheet.html">Super Stars FC defensive performance</a></h3>
+    <p><a href="./clean-sheet.html" style="color: var(--muted);">Super Stars FC delivered one of their most complete and commanding performances of the season...</a></p>
+  </div>
+
+  <div class="news-card" data-title="Super Strs FC midfielder"
+    data-img="image3.jpeg"
+    data-content="Rising Midfielder Making His Mark...">
+    <img src="PHOTO-2025-09-08-00-27-51.jpg">
+    <h3><a href="./player-spotlight.html">Player Spotlight: Rising Midfielder Making His Mark</a></h3>
+    <p><a href="./player-spotlight.html" style="color: var(--muted);">Every team has that one player whose growth seems to run parallel with the club’s own evolution...</a></p>
+  </div>
+
+  <div class="news-card" data-title="Captain’s Corner: Leadership On and Off the Field"
+    data-img="image3.jpeg"
+    data-content="Captain’s Corner: Leadership On and Off the Field...">
+    <img src="ssf7.jpg">
+    <h3><a href="./captains-corner.html">Captain’s Corner: Leadership On and Off the Field</a></h3>
+    <p><a href="./captains-corner.html" style="color: var(--muted);">Leadership at Super Stars FC has never been limited to the weight of the armband...</a></p>
+  </div>
+
+  <div class="news-card" data-title="An End-Of-Season Vibe"
+    data-img="image3.jpeg"
+    data-content="Our UPSL squad has closed out a season of grind and growth...">
+    <img src="ssc4.jpg">
+    <h3><a href="./end.html">An End-Of-Season Vibe</a></h3>
+    <p><a href="./end.html" style="color: var(--muted);">Our UPSL squad has closed out a season of grind and growth...</a></p>
+  </div>
+
+  <div class="news-card" data-title="WENDÔK Sportswear Partnership"
+    data-img="WENDOK SPORTSWEAR.jpg"
+    data-content="Join us as Super Stars FC teams up with WENDÔK Sportswear...">
+    <img src="WENDOK SPORTSWEAR.jpg">
+    <h3><a href="./wendok.html">WENDÔK Sportswear</a></h3>
+    <p><a href="./wendok.html" style="color: var(--muted);">Join us as Super Stars FC teams up with WENDÔK Sportswear...</a></p>
+  </div>
+</section>
+
+    
+<!-- ---------- Footer ---------- -->
+<footer class="site-footer">     
+  <div class="footer-container">
+
+  <!-- Brand -->        
+  <div class="footer-brand">                                 
+    <h3>© Super Star FC</h3>
+    <a>Founded in June 2025.
+      </br> Omaha's rising soccer club.
+    </a>
+    <p>Building champions! 
+      <br>Omaha's pride on and off the field.
+    </p>      
+  </div>
+      
+  <!-- Links -->      
+  <div class="footer-links">       
+    <h4>Quick Links</h4>      
+    <a href="./about.html">About Us</a>
+    <a href="./term.html">Term</a>      
+    <a href="./contact.html">Contact</a>
+    <a href="./Privacy.html">Privacy Policy</a>       
+  </div>
+         
+  <!-- Contact -->      
+  <div class="footer-contact">        
+    <h4>Contact</h4>         
+    <p>Email: superstarfc25@gmail.com</p>       
+    <p>Phone: +1 (531) 262-1982</p>     
+  </div>
+      
+  <!-- Social -->      
+  <div class="footer-social">               
+    <h4>Follow Us</h4>         
+    <div class="social-icons">             
+      <a href="https://www.facebook.com/profile.php?id=100077275385711" aria-label="Facebook" class="icon-facebook">               
+        <svg viewBox="0 0 24 24" aria-hidden="true">              
+          <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2.2V12h2.2V9.8c0-2.2 1.3-3.4 3.3-3.4.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 2.9h-1.9v7A10 10 0 0 0 22 12z"/>        
+        </svg>             
+      </a>
+                        
+      <a href="https://www.instagram.com/super_starsfc_fc?igsh=MWUyM3IxbHI1Y3p-sOQ==" aria-label="Instagram" class="icon-instagram">              
+        <svg viewBox="0 0 24 24" aria-hidden="true">               
+          <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10zm-5 3.5A5.5 5.5 0 1 0 17.5 13 5.5 5.5 0 0 0 12 7.5zm0 2A3.5 3.5 0 1 1 8.5 13 3.5 3.5 0 0 1 12 9.5zm5.8-2.1a1.3 1.3 0 1 1-1.3-1.3 1.3 1.3 0 0 1 1.3 1.3z"/> 
+        </svg>           
+      </a>
+        
+      <a href="https://x.com/SuperStars75843?t=tZZoC1LvPfNGI-BKk15JG4g&S=09" aria-label="Twitter" class="icon-twitter">              
+        <svg viewBox="0 0 24 24" aria-hidden="true">                 
+          <path d="M23 3a10.9 10.9 0 0 1-3.1.9A5.4 5.4 0 0 0 22.4 1a10.8 10.8 0 0 1-3.4 1.3A5.4 5.4 0 0 0 9.6 7a15.3 15.3 0 0 1-11.1-5.6 5.4 5.4 0 0 0 1.7 7.2A5.3 5.3 0 0 1 .8 8v.1a5.4 5.4 0 0 0 4.3 5.3 5.5 5.5 0 0 1-2.4.1 5.4 5.4 0 0 0 5 3.8A10.8 10.8 0 0 1 0 19.5 15.3 15.3 0 0 0 8.3 22c10 0 15.5-8.3 15.5-15.5v-.7A11 11 0 0 0 23 3z"/>             
+        </svg>            
+      </a>        
+
+      <a href="https://www.youtube.com/@SuperStarsFC-t8b" aria-label="YouTube" class="icon-youtube">          
+        <svg viewBox="0 0 24 24" aria-hidden="true">       
+          <path d="M23.5 6.2s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.1-1C17.6 2.5 12 2.5 12 2.5h0s-5.6 0-8.5.4c-.4.1-1.3.1-2.1 1C.7 4.6.5 6.2.5 6.2S0 8.1 0 10v2c0 1.9.5 3.8.5 3.8s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.2.4 7.2.4s5.6 0 8.5-.4c.4-.1 1.3-.1 2.1-1 .7-.7.9-2.3.9-2.3s.5-1.9.5-3.8v-2c0-1.9-.5-3.8-.5-3.8zM9.8 14.5V9.5l4.8 2.5-4.8 2.5z"/>            
+        </svg>           
+      </a>         
+    </div>         
+  </div>     
+</div>
+       
+<div class="footer-bottom">       
+  © <span id="year"></span> Super Star FC. All rights reserved.     
+</div> 
+</footer>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new date(). getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>An End-Of-Season Vibe | Super Stars FC</title>
+  <link rel="shortcut icon" href="../image0.jpeg">
+
+  <style>
+:root{
+  --bg:#0b1020;
+  --card:#0f1724;
+  --accent-red:#b62a2d;
+  --accent-blue:#1c5da4;
+  --muted:#9aa4b2;
+  --light:#ffffff;
+}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#071021);
+  color:#e6eef8;
+  line-height:1.7;
+}
+
+/* HERO */
+.hero{
+  padding:4rem 1.5rem;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:2.6rem;
+  margin-bottom:1rem;
+}
+
+.hero p{
+  max-width:900px;
+  margin:auto;
+  font-size:1.15rem;
+  color:var(--muted);
+}
+
+/* SECTIONS */
+.section{
+  max-width:1100px;
+  margin:2rem auto 0;
+  background:var(--card);
+  padding:3rem 1.5rem;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+h2{
+  color:var(--accent-blue);
+  border-left:5px solid var(--accent-red);
+  padding-left:.8rem;
+  margin-bottom:1.2rem;
+}
+
+p{
+  color:var(--muted);
+  margin-bottom:1.1rem;
+}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.5rem;
+  margin-top:2rem;
+}
+
+.gallery img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+  transition:transform .3s ease;
+}
+
+.gallery img:hover{
+  transform:scale(1.04);
+}
+
+/* CTA */
+.cta{
+  text-align:center;
+  padding:3.5rem 1.5rem;
+  margin-top:3rem;
+}
+
+.cta h2{
+  border:none;
+  color:#fff;
+}
+
+.cta p{
+  max-width:800px;
+  margin:1rem auto;
+  color:#e6eef8;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: linear-gradient(180deg, var(--bg), #060a18);
+  color: #e6eef8;
+  padding: 36px 20px 20px;
+  font-size: 14px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Layout */
+.footer-container {
+  max-width: var(--max-w);
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 36px;
+}
+
+/* Brand */
+.footer-brand h3 {
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.footer-brand p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Section headers */
+.footer-links h4,
+.footer-contact h4,
+.footer-social h4 {
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-size: 15px;
+  position: relative;
+}
+
+/* Accent underline */
+.footer-links h4::after,
+.footer-contact h4::after,
+.footer-social h4::after {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 2px;
+  margin-top: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-red),
+    var(--accent-blue)
+  );
+}
+
+/* Links */
+.footer-links a {
+  display: block;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-secondary);
+  transform: translateX(4px);
+}
+
+/* Contact */
+.footer-contact p {
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+/* Social icons */
+/* Social icons */
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+
+  border-radius: 50%;
+  color: var(--muted);
+  text-decoration: none;
+
+  transition: 
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* SVG support */
+.social-icons a svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Hover */
+.social-icons a:hover {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.social-icons a.icon-youtube:hover {
+  background: #ff0000; /* YouTube red */
+}
+
+.social-icons a.icon-facebook:hover {
+  background: #1c5da4; /* Facebook blue */
+}
+
+.social-icons a.icon-twitter:hover {
+  background: #000000; /* Twitter black */
+}
+
+/* Keyboard focus (accessibility) */
+.social-icons a:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--bg),
+    0 0 0 4px var(--accent-secondary);
+}
+
+/* Footer bottom */
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 16px;
+  text-align: center;
+  color: var(--muted);
+  position: relative;
+}
+
+/* Gradient divider */
+.footer-bottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-red),
+    var(--accent-blue),
+    transparent
+  );
+}
+   
+@media (max-width: 520px) {      
+  header { margin-bottom: 40px; }    
+}
+  </style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>An End-Of-Season Vibe</h1>
+  <p>
+    Our UPSL squad has closed out a season of grind and growth, built on
+    resilience, unity, and belief in the process.
+  </p>
+</section>
+
+<!-- ARTICLE -->
+<section class="section">
+  <h2>A Season Defined by Effort</h2>
+  <p>
+    This season tested the character of the Super Stars FC UPSL squad from start
+    to finish. Every training session, every matchday, and every challenge
+    demanded focus and commitment.
+  </p>
+
+  <p>
+    Players stepped up in key moments, embraced responsibility, and continued
+    to grow as individuals and as a unit. The progress made throughout the
+    campaign was clear, in performance, mentality, and cohesion.
+  </p>
+
+  <p>
+    Most importantly, this season reinforced the identity of Super Stars FC:
+    hardworking, united, and driven to improve.
+  </p>
+</section>
+
+<!-- GALLERY -->
+<section class="section">
+  <h2>Season Moments</h2>
+  <p>
+    A look back at the moments, matches, and memories that defined the journey.
+  </p>
+
+  <div class="gallery">
+    <!-- Replace src with real match photos -->
+    <img src="../image12.jpg" alt="Match action">
+    <img src="../IMG_15611.jpeg" alt="Rising player">
+    <img src="../team out.jpeg" alt="Team Outing">
+    <img src="../0fd4279c-c053-4fd1-9948-58a87c23d14a.jpg" alt="End of Season">
+    <img src="../community event1.jpeg" alt="Community event">
+    <img src="../IMG_1649.jpg" alt="Team huddle">
+  </div>
+</section>
+
+<!-- ARTICLE -->
+<section class="section">
+  <h2>Focused on the Future</h2>
+  <p>
+    As the team looks ahead, everything learned this season becomes the base for what comes next. The growth shown by the players, both on their own and together, has strengthened the club’s belief in where it’s going. Every setback was a chance to bounce back, and every good moment showed what the team can do when it stays true to who it is.
+  </p>
+
+  <p>
+    Super Stars FC moves forward with confidence, purpose, and a drive to keep raising the level. The same values that carried the team this year, hard work, unity, and hunger, will continue to guide the journey.
+  </p>
+
+  <p>
+    The club thanks the players, coaches, staff, supporters, and community for their effort and support. They are the reason the club keeps growing and pushing forward.
+  </p>
+
+  <p>
+    This season is only one chapter. The work continues, and the future looks bright.
+  </p>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>The Journey Continues</h2>
+  <p>
+    This season was only the beginning. With lessons learned and foundations
+    built, Super Stars FC looks forward with confidence and ambition.
+  </p>
+  <p>© Super Stars FC • UPSL Program</p>
+</section>
+  
+<!-- ---------- Footer ---------- -->  
+<footer class="site-footer"> 
+  <div class="footer-container">
+         
+    <!-- Brand -->
+    <div class="footer-brand">          
+      <h3>Super Star FC</h3>          
+      <p>Building champions on and off the field.</p>       
+    </div>
+   
+    <!-- Links -->
+        
+    <div class="footer-links">          
+      <h4>Quick Links</h4>          
+      <a href="./about.html">About Us</a>          
+      <a href="./term.html">Term</a>          
+      <a href="./contact.html">Contact</a>         
+      <a href="./policy.html">Privacy Policy</a>       
+    </div>
+          
+    <!-- Contact -->       
+    <div class="footer-contact">          
+      <h4>Contact</h4>          
+      <p>Email: superstarfc25@gmail.com</p>          
+      <p>Phone: +1 (531) 262-1982</p>        
+    </div>
+   
+    <!-- Social -->   
+    <div class="footer-social">
+          
+      <h4>Follow Us</h4>
+          
+      <div class="social-icons">              
+        <a href="https://www.facebook.com/profile.php?id=100077275385711" aria-label="Facebook" class="icon-facebook">                
+          <svg viewBox="0 0 24 24" aria-hidden="true">                  
+            <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2.2V12h2.2V9.8c0-2.2 1.3-3.4 3.3-3.4.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 2.9h-1.9v7A10 10 0 0 0 22 12z"/>                
+          </svg>             
+        </a>
+          
+        <a href="https://www.instagram.com/super_starsfc_fc?igsh=MWUyM3IxbHI1Y3p-sOQ==" aria-label="Instagram" class="icon-instagram">           
+          <svg viewBox="0 0 24 24" aria-hidden="true">             
+            <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10zm-5 3.5A5.5 5.5 0 1 0 17.5 13 5.5 5.5 0 0 0 12 7.5zm0 2A3.5 3.5 0 1 1 8.5 13 3.5 3.5 0 0 1 12 9.5zm5.8-2.1a1.3 1.3 0 1 1-1.3-1.3 1.3 1.3 0 0 1 1.3 1.3z"/>            
+          </svg>                     
+        </a>
+      
+        <a href="https://x.com/SuperStars75843?t=tZZoC1LvPfNGI-BKk15JG4g&S=09" aria-label="Twitter" class="icon-twitter">               
+          <svg viewBox="0 0 24 24" aria-hidden="true">                 
+            <path d="M23 3a10.9 10.9 0 0 1-3.1.9A5.4 5.4 0 0 0 22.4 1a10.8 10.8 0 0 1-3.4 1.3A5.4 5.4 0 0 0 9.6 7a15.3 15.3 0 0 1-11.1-5.6 5.4 5.4 0 0 0 1.7 7.2A5.3 5.3 0 0 1 .8 8v.1a5.4 5.4 0 0 0 4.3 5.3 5.5 5.5 0 0 1-2.4.1 5.4 5.4 0 0 0 5 3.8A10.8 10.8 0 0 1 0 19.5 15.3 15.3 0 0 0 8.3 22c10 0 15.5-8.3 15.5-15.5v-.7A11 11 0 0 0 23 3z"/>              
+          </svg>            
+        </a>        
+
+        <a href="https://www.youtube.com/@SuperStarsFC-t8b" aria-label="YouTube" class="icon-youtube">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M23.5 6.2s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.1-1C17.6 2.5 12 2.5 12 2.5h0s-5.6 0-8.5.4c-.4.1-1.3.1-2.1 1C.7 4.6.5 6.2.5 6.2S0 8.1 0 10v2c0 1.9.5 3.8.5 3.8s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.2.4 7.2.4s5.6 0 8.5-.4c.4-.1 1.3-.1 2.1-1 .7-.7.9-2.3.9-2.3s.5-1.9.5-3.8v-2c0-1.9-.5-3.8-.5-3.8zM9.8 14.5V9.5l4.8 2.5-4.8 2.5z"/> 
+          </svg>
+        </a>
+      </div>   
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    © <span id="year"></span> Super Star FC. All rights reserved.
+  </div>
+</footer>
+
+
+</body>
+</html>

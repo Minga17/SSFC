@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Super Star FC — Matches</title>
+  <link rel="shortcut icon" href="image0.jpeg" type="image/jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="description" content="Super Star FC — Matches and Results." />
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #0f1724;
+      --accent: #ff1e1e;          /* red */
+      --accent-secondary: #007bff; /* blue */
+      --muted: #9aa4b2;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--bg), #071021);
+      color: #e6eef8;
+      padding: 32px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container { width: 100%; max-width: 1100px; }
+
+    /* HEADER */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 30px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: inherit;
+    }
+    .logo {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+    nav { display: flex; gap: 16px; align-items: center; }
+    nav a {
+      color: var(--muted); text-decoration: none; font-weight: 600;
+    }
+    nav a.cta {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #fff; padding: 10px 14px; border-radius: 10px; font-weight: 700;
+      text-decoration: none; transition: 0.3s;
+    }
+    nav a.cta:hover { opacity: 0.85; }
+
+    /* SIDEBAR ICONS */
+    #icons {
+      position: fixed;
+      top: 50%; left: 0;
+      transform: translateY(-50%);
+      width: 65px; height: 500px;
+      background: var(--accent-secondary);
+      border-radius: 0 60px 60px 0;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      z-index: 998;
+    }
+    #icons a {
+      color: #fff; font-size: 28px;
+      margin: 20px 0;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    #icons a:hover {
+      color: var(--accent);
+      transform: scale(1.15);
+    }
+
+    /* PAGE CONTENT */
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 24px;
+      color: var(--accent-secondary);
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+
+    .match-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .match-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .match-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+    }
+
+    .match-header {
+      display: flex; justify-content: space-between;
+      font-weight: 700; margin-bottom: 10px;
+      color: var(--accent);
+    }
+
+    .teams {
+      font-size: 1.1rem; font-weight: 700;
+      color: #fff; margin-bottom: 6px;
+    }
+
+    .details {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 720px) {
+      .match-list { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: linear-gradient(180deg, var(--bg), #060a18);
+  color: #e6eef8;
+  padding: 36px 20px 20px;
+  font-size: 14px;
+}
+
+/* Layout */
+.footer-container {
+  max-width: var(--max-w);
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 36px;
+}
+
+/* Brand */
+.footer-brand h3 {
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.footer-brand p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Section headers */
+.footer-links h4,
+.footer-contact h4,
+.footer-social h4 {
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-size: 15px;
+  position: relative;
+}
+
+/* Accent underline */
+.footer-links h4::after,
+.footer-contact h4::after,
+.footer-social h4::after {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 2px;
+  margin-top: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    var(--accent-secondary)
+  );
+}
+
+/* Links */
+.footer-links a {
+  display: block;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-secondary);
+  transform: translateX(4px);
+}
+
+/* Contact */
+.footer-contact p {
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+/* Social icons */
+/* Social icons */
+.social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+
+  border-radius: 50%;
+  color: var(--muted);
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* SVG support */
+.social-icons a svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Hover */
+.social-icons a:hover {
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-secondary)
+  );
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.social-icons a.icon-youtube:hover {
+  background: #ff0000; /* YouTube red */
+}
+
+.social-icons a.icon-facebook:hover {
+  background: #1c5da4; /* Facebook blue */
+}
+
+.social-icons a.icon-twitter:hover {
+  background: #000000; /* Twitter black */
+}
+
+
+/* Keyboard focus (accessibility) */
+.social-icons a:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--bg),
+    0 0 0 4px var(--accent-secondary);
+}
+
+
+/* Footer bottom */
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 16px;
+  text-align: center;
+  color: var(--muted);
+  position: relative;
+}
+
+/* Gradient divider */
+.footer-bottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent),
+    var(--accent-secondary),
+    transparent
+  );
+}
+  
+/* --- Responsive --- */ 
+@media (max-width:880px){  
+  .hero{grid-template-columns:1fr;}   
+  .features{grid-template-columns:1fr 1fr}  
+}
+    
+@media (max-width:520px){    
+  body{padding:18px}     
+  .features{grid-template-columns:1fr}   
+  nav{display:none}
+}
+
+    
+/* MODAL */ 
+.modal {   
+  position: fixed;     
+  top: 0; left: 0;    
+  width: 100%; height: 100%;    
+  background: rgba(0,0,0,0.75);
+  display: none;   
+  justify-content: center;   
+  align-items: center; 
+  z-index: 999;
+}
+
+.modal.active { display: flex; }
+
+.modal-content {      
+  background: var(--card);      
+  padding: 24px;      
+  border-radius: 12px;      
+  width: 90%;      
+  max-width: 500px;      
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);     
+  position: relative;   
+  animation: pop 0.3s ease;
+}
+ 
+@keyframes pop {     
+  from { transform: scale(0.9); opacity: 0; }     
+  to { transform: scale(1); opacity: 1; }  
+}
+   
+.modal-content h2 {  
+  margin-top: 0;   
+  color: var(--accent-secondary);  
+}
+  
+.modal-content p {    
+  margin: 6px 0;    
+  color: var(--muted); 
+}
+   
+.close-btn {    
+  position: absolute;      
+  top: 10px; right: 14px;      
+  font-size: 1.4rem;      
+  color: var(--accent);     
+  cursor: pointer;     
+  font-weight: bold;   
+}
+</style>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <a class="brand" href="#">
+        <div class="logo">SS</div>
+        <div>
+          <div style="font-weight:800">Super Star FC</div>
+          <div style="font-size:0.8rem;color:var(--muted)">Official Club</div>
+        </div>
+      </a>
+      <nav>
+        <a href="./index.html" claas="cta">Main</a>
+        <a href="./roster.html" class="cta">Roster</a>
+        <a href="./contact.html" class="cta">Join Us</a>
+      </nav>
+    </header>
+
+    <h1>Matches & Results</h1>
+
+    <section>
+      <h2 style="color:var(--accent)">Upcoming Matches</h2>
+      <div class="match-list">
+        <div class="match-card" data-title="Super Star FC vs City Rovers" data-date="Sat, Nov 22" data-time="7:00 PM" data-location="Omaha Stadium" data-info="Home opener — expect fireworks and fan giveaways!">
+          <div class="match-header">
+            <span>Sat, Nov 22</span><span>Home</span>
+          </div>
+          <div class="teams">Super Star FC vs City Rovers</div>
+          <div class="details">7:30 PM • Omaha Stadium</div>
+        </div>
+
+        <div class="match-card" data-title="River Kings vs Super Star FC" data-date="Sat, Nov 29" data-time="6:30 PM" data-location="Riverside Park" data-info="Tough away match — SSFC seeks revenge for last season’s defeat.">
+          <div class="match-header">
+            <span>Sat, Nov 29</span><span>Away</span>
+          </div>
+          <div class="teams">River Kings vs Super Star FC</div>
+          <div class="details">6:30 PM • Riverside Park</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 style="color:var(--accent-secondary)">Past Matches</h2>
+      <div class="match-list">
+        <div class="match-card" data-title="Super Star FC vs Vunja Vikwazo FC" data-date="Sat, Oct 25" data-time="Final" data-location="Kansas City Stadium" data-info="Game was canceled, due to same  team issues.">
+          <div class="match-header">
+            <span>Sat, Nov 1</span><span>Final</span>
+          </div>
+          <div class="teams">Super Star FC vs Vunja Vikwazo FC</div>
+          <div class="details">5:30 PM • Kansas City Stadium</div>
+        </div>
+
+        <div class="match-card" data-title="Super Star FC 2 - 4 Yazidi FC" data-date="Sat, Oct 04" data-time="Final" data-location="Lincoln" data-info="Goals: Shimalo (1), John (1), John equalized in the 66th minute to secure a draw, but still end up with a defeat.">
+          <div class="match-header">
+            <span>Sun, Oct 04</span><span>Final</span>
+          </div>
+          <div class="teams">Super Stars FC 2 - 4 Yazidi FC </div>
+          <div class="details">Lincoln • Attendance: 450</div>
+        </div>
+
+        <div class="match-card" data-title="Super Star FC 1 - 1 Omaha Street FC" data-date="Sat, Oct 01" data-time="Final" data-location="Blackburn High School: 2606 Hamilton St, OMAHA, NE 68131" data-info="Goals: Abel (1), Abel equalized in the 57th minute to secure a draw.">
+          <div class="match-header">
+            <span>Wen, Oct 01</span><span>Final</span>
+          </div>
+          <div class="teams">Super Stars FC 1 - 1 Omaha Street FC </div>
+          <div class="details">Blackburn High School • Attendance: 350</div>
+        </div>
+
+        <div class="match-card" data-title="Omaha Elites 5 - 4 Super Star FC" data-date="Sat, Sep 20" data-time="Final" data-location="Benson Stadium: 5120 MAPLE ST, OMAHA, NE 68104" data-info="Goals: Tresor (1), Minga (1), John (2), what a great team-work was perform tonight, but end up with a defeat.">
+          <div class="match-header">
+            <span>Sat, Sep 20</span><span>Final</span>
+          </div>
+          <div class="teams">Omaha Elites 5 - 4 Super Star FC</div>
+          <div class="details">Benson Stadium • Attendance: 810</div>
+        </div>
+
+        <div class="match-card" data-title="Super Star FC 5 - 3 Onaha Stars FC" data-date="Sat, Sep 06" data-time="Final" data-location="Benson Stadium: 5120 MAPLE ST, OMAHA, NE 68104" data-info="Goals: Shimalo (1), Divo (1), Jackson (1), John (2), John is on fire with scoring braces for Super Stars FC, what a win, strong finish and excellent team pla.">
+          <div class="match-header">
+            <span>Sat, Sep 06</span><span>Final</span>
+          </div>
+          <div class="teams">Super Star FC 5 - 3 Onaha Stars FC</div>
+          <div class="details">Benson Stadium • Attendance: 810</div>
+        </div>
+
+        <div class="match-card" data-title="Super Star FC 2 - 4 Yazidi FC" data-date="Sat, Oct 25" data-time="Final" data-location="Benson Stadium: 5120 MAPLE ST, OMAHA, NE 68104" data-info="Goals: Minga (1), John (1), John equalized in the 49th minute to secure a draw, but still end up with a defeat.">
+          <div class="match-header">
+            <span>Sun, Aug 31</span><span>Final</span>
+          </div>
+          <div class="teams">Super Stars FC 2 - 4 Yazidi FC </div>
+          <div class="details">Benson Stadium • Attendance: 750</div>
+        </div>
+
+        <div class="match-card" data-title="Omaha Elites 2 - 4 Super Star FC" data-date="Sun, Aug 24" data-time="Final" data-location="Benson Stadium: 5120 MAPLE ST, OMAHA, NE 68104" data-info="Tresor (1), John (2), Minga (1), John make his second brace for Super Stars FC, and Minga finish the final action with his goal in the 90+1th minute to secure a win.">
+          <div class="match-header">
+            <span>Sun, Aug 24</span><span>Final</span>
+          </div>
+          <div class="teams">Omaha Elites 2 - 4 Super Star FC</div>
+          <div class="details">Benson Stadium • Attendance: 590</div>
+        </div>
+
+        <div class="match-card" data-title="Togoless Soccer Association 5 - 8 Super Star FC" data-date="Sat, August 16" data-time="Final" data-location="Papillon Landing Sports Complex" data-info="Goals: John (2), Tresor (1), Brighton (1), Divo (1), Jackson (3),Jackson last goal in the 90+6th minute secure a final win and his first hat-trick for Super Stars FC.">
+          <div class="match-header">
+            <span>Sat, Aug 16</span><span>Final</span>
+          </div>
+          <div class="teams">Togoless Soccer Association 5 - 8 Super Star FC</div>
+          <div class="details">Sports Complex • Attendance: 150</div>
+        </div>
+      </div>
+    </section>
+        
+    <!-- ---------- Footer ---------- -->
+    <footer class="site-footer">
+      <div class="footer-container">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <h3>© Super Star FC</h3>         
+          <p>Founded June 3, 2025.</p>
+          <p>Building champions on and off the field.</p>
+        </div>
+
+        <!-- Links -->
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="./about.html">About Us</a>
+          <a href="./term.html">Term</a>                   
+          <a href="./contact.html">Contact</a>
+          <a href="./Privacy.html">Privacy Policy</a>
+        </div>
+    
+        <!-- Contact -->
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p>Email: superstarfc25@gmail.com</p>
+          <p>Phone: +1 (531) 262-1982</p>
+        </div>
+
+        <!-- Social -->
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=100077275385711" aria-label="Facebook" class="icon-facebook"> 
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2.2V12h2.2V9.8c0-2.2 1.3-3.4 3.3-3.4.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.3l-.4 2.9h-1.9v7A10 10 0 0 0 22 12z"/>
+                </svg>
+              </a>
+               
+            <a href="https://www.instagram.com/super_starsfc_fc?igsh=MWUyM3IxbHI1Y3p-sOQ==" aria-label="Instagram" class="icon-instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10zm-5 3.5A5.5 5.5 0 1 0 17.5 13 5.5 5.5 0 0 0 12 7.5zm0 2A3.5 3.5 0 1 1 8.5 13 3.5 3.5 0 0 1 12 9.5zm5.8-2.1a1.3 1.3 0 1 1-1.3-1.3 1.3 1.3 0 0 1 1.3 1.3z"/> 
+              </svg>
+            </a>
+
+            <a href="https://x.com/SuperStars75843?t=tZZoC1LvPfNGI-BKk15JG4g&S=09" aria-label="Twitter" class="icon-twitter"> 
+              <svg viewBox="0 0 24 24" aria-hidden="true">  
+                <path d="M23 3a10.9 10.9 0 0 1-3.1.9A5.4 5.4 0 0 0 22.4 1a10.8 10.8 0 0 1-3.4 1.3A5.4 5.4 0 0 0 9.6 7a15.3 15.3 0 0 1-11.1-5.6 5.4 5.4 0 0 0 1.7 7.2A5.3 5.3 0 0 1 .8 8v.1a5.4 5.4 0 0 0 4.3 5.3 5.5 5.5 0 0 1-2.4.1 5.4 5.4 0 0 0 5 3.8A10.8 10.8 0 0 1 0 19.5 15.3 15.3 0 0 0 8.3 22c10 0 15.5-8.3 15.5-15.5v-.7A11 11 0 0 0 23 3z"/>
+              </svg> 
+            </a>        
+
+            <a href="https://www.youtube.com/@SuperStarsFC-t8b" aria-label="YouTube" class="icon-youtube">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.5 6.2s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.1-1C17.6 2.5 12 2.5 12 2.5h0s-5.6 0-8.5.4c-.4.1-1.3.1-2.1 1C.7 4.6.5 6.2.5 6.2S0 8.1 0 10v2c0 1.9.5 3.8.5 3.8s.2 1.6.9 2.3c.8.9 1.9.9 2.4 1 1.7.2 7.2.4 7.2.4s5.6 0 8.5-.4c.4-.1 1.3-.1 2.1-1 .7-.7.9-2.3.9-2.3s.5-1.9.5-3.8v-2c0-1.9-.5-3.8-.5-3.8zM9.8 14.5V9.5l4.8 2.5-4.8 2.5z"/> 
+              </svg>
+            </a>
+
+          </div>   
+        </div>
+      </div>
+  
+      <div class="footer-bottom">
+        © <span id="year"></span> Super Star FC. All rights reserved.
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="matchModal">
+    <div class="modal-content">
+      <div class="close-btn" id="closeModal">&times;</div>
+      <h2 id="modalTitle"></h2>
+      <p><strong>Date:</strong> <span id="modalDate"></span></p>
+      <p><strong>Time:</strong> <span id="modalTime"></span></p>
+      <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+      <p id="modalInfo"></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const modal = document.getElementById("matchModal");
+    const closeModal = document.getElementById("closeModal");
+
+    document.querySelectorAll(".match-card").forEach(card => {
+      card.addEventListener("click", () => {
+        document.getElementById("modalTitle").textContent = card.dataset.title;
+        document.getElementById("modalDate").textContent = card.dataset.date;
+        document.getElementById("modalTime").textContent = card.dataset.time;
+        document.getElementById("modalLocation").textContent = card.dataset.location;
+        document.getElementById("modalInfo").textContent = card.dataset.info;
+
+        modal.classList.add("active");
+      });
+    });
+
+    closeModal.addEventListener("click", () => modal.classList.remove("active"));
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
+  </script>
+</body>
+</html>
