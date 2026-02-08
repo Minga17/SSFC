@@ -158,6 +158,112 @@ p {
   line-height: 1.6;    
 }
 
+/* ---------- Affiliations Section ---------- */
+
+.affiliations {
+  background: var(--card);
+  padding: 30px;
+  border-radius: 12px;
+  margin-top: 60px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.affiliations h2 {
+  text-align: center;
+  color: var(--accent-blue);
+  margin-bottom: 18px;
+}
+
+.affiliation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.5rem;
+}
+
+.affiliation-card {
+  position: relative;
+  padding: 2.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+  transition: transform .4s ease;
+}
+
+.affiliation-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Tooltip */
+.affiliation-card::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  background: linear-gradient(
+    135deg,
+    var(--accent-red),
+    var(--accent-blue)
+  );
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 10px 12px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateX(-50%) translateY(8px);
+  z-index: 10;
+}
+
+.affiliation-card:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.affiliation-card img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  margin-bottom: 14px;
+}
+
+.affiliation-card h3 {
+  color: var(--accent-red);
+  margin-bottom: 8px;
+}
+
+.affiliation-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+/* CTA button */
+.affiliation-cta {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(
+    135deg,
+    var(--accent-blue),
+    var(--accent-red)
+  );
+  text-decoration: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.affiliation-cta:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   background: linear-gradient(180deg, var(--bg), #060a18);
@@ -343,18 +449,7 @@ p {
 
     <section class="partners">
       <h2>Our Official Partners</h2>
-
-      <div class="partner-grid animate">
-        <div class="partner-card">
-          <img src="Bloom.pjg.jpg" alt="BLOOM Logo">
-          <h3><a href="./bloom.html">🌟BLOOM</a></h3>
-          <p>
-            BLOOM and Super Stars FC share one goal: giving Omaha’s youth the tools to thrive.  
-            From mentorship and education to community-driven soccer programs, we’re building confidence, leadership, and opportunity.  
-            Together, we’re proving that football isn’t just a game—it’s a pathway to lasting change.
-          </p>
-        </div>
-
+      
         <div class="partner-card animate">
           <img src="WENDOK SPORTSWEAR.jpg" alt="WENDOK Sportswear Logo">
           <h3><a href="./wendok.html">🌟WENDÔK Sportswear</a></h3>
@@ -367,8 +462,59 @@ p {
       </div>
     </section>
   </div>
-    
-  <!-- ---------- Footer ---------- -->  
+  
+  <section class="affiliations">
+  <h2>Affiliations & Official Relationships</h2>
+
+  <div class="affiliation-grid">
+
+    <!-- UPSL -->
+    <div
+      class="affiliation-card"
+      data-tooltip="UPSL affiliation means national competition, professional standards, and a clear pathway for players to advance to higher levels of the game."
+    >
+      <img src="upsl-logo.png" alt="UPSL Logo">
+      <h3>United Premier Soccer League (UPSL)</h3>
+      <p>
+        Super Stars FC competes in the UPSL, one of the fastest-growing and
+        most competitive semi-professional soccer leagues in the United States.
+        This affiliation gives our players national exposure and elite-level competition.
+      </p>
+      <a
+        href="https://premiersoccerleague.com"
+        target="_blank"
+        class="affiliation-cta"
+      >
+        Learn about the UPSL
+      </a>
+    </div>
+
+    <!-- WENDÔK -->
+    <div
+      class="affiliation-card"
+      data-tooltip="Our partnership with WENDÔK represents shared values—performance, creativity, and community impact beyond the pitch."
+    >
+      <img src="WENDOK SPORTSWEAR.jpg" alt="WENDÔK Sportswear Logo">
+      <h3>WENDÔK Sportswear</h3>
+      <p>
+        WENDÔK Sportswear is our official kit partner, providing high-performance
+        apparel designed to match our ambition. Together, we promote innovation,
+        identity, and pride on and off the field.
+      </p>
+      <a
+        href="./wendok.html"
+        class="affiliation-cta"
+      >
+        Explore the Partnership
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- ---------- Footer ---------- --> 
+  <footer class="site-footer">
   <footer class="site-footer">
     <div class="footer-container">    
         
@@ -434,3 +580,4 @@ p {
 
 </body>
 </html>
+
